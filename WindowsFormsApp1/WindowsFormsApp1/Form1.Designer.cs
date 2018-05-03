@@ -32,11 +32,11 @@
             this.pB1 = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.showButton = new System.Windows.Forms.Button();
-            this.clearButton = new System.Windows.Forms.Button();
             this.BChooseFile = new System.Windows.Forms.Button();
+            this.BGTeinlesen = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
             this.PicNumberTaker = new System.Windows.Forms.NumericUpDown();
-            this.BGTeinlesen = new System.Windows.Forms.Button();
+            this.BShowGT = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pB1)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -76,7 +76,7 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.showButton);
-            this.flowLayoutPanel1.Controls.Add(this.clearButton);
+            this.flowLayoutPanel1.Controls.Add(this.BShowGT);
             this.flowLayoutPanel1.Controls.Add(this.BChooseFile);
             this.flowLayoutPanel1.Controls.Add(this.BGTeinlesen);
             this.flowLayoutPanel1.Controls.Add(this.closeButton);
@@ -98,21 +98,10 @@
             this.showButton.UseVisualStyleBackColor = true;
             this.showButton.Click += new System.EventHandler(this.showButton_Click);
             // 
-            // clearButton
-            // 
-            this.clearButton.AutoSize = true;
-            this.clearButton.Location = new System.Drawing.Point(345, 3);
-            this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(94, 23);
-            this.clearButton.TabIndex = 1;
-            this.clearButton.Text = "Anzeige leeren";
-            this.clearButton.UseVisualStyleBackColor = true;
-            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
-            // 
             // BChooseFile
             // 
             this.BChooseFile.AutoSize = true;
-            this.BChooseFile.Location = new System.Drawing.Point(253, 3);
+            this.BChooseFile.Location = new System.Drawing.Point(269, 3);
             this.BChooseFile.Name = "BChooseFile";
             this.BChooseFile.Size = new System.Drawing.Size(86, 23);
             this.BChooseFile.TabIndex = 2;
@@ -120,10 +109,21 @@
             this.BChooseFile.UseVisualStyleBackColor = true;
             this.BChooseFile.Click += new System.EventHandler(this.BChooseFile_Click);
             // 
+            // BGTeinlesen
+            // 
+            this.BGTeinlesen.AutoSize = true;
+            this.BGTeinlesen.Location = new System.Drawing.Point(162, 3);
+            this.BGTeinlesen.Name = "BGTeinlesen";
+            this.BGTeinlesen.Size = new System.Drawing.Size(101, 23);
+            this.BGTeinlesen.TabIndex = 4;
+            this.BGTeinlesen.Text = "GT Daten wählen";
+            this.BGTeinlesen.UseVisualStyleBackColor = true;
+            this.BGTeinlesen.Click += new System.EventHandler(this.BGTeinlesen_Click);
+            // 
             // closeButton
             // 
             this.closeButton.AutoSize = true;
-            this.closeButton.Location = new System.Drawing.Point(65, 3);
+            this.closeButton.Location = new System.Drawing.Point(81, 3);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(75, 23);
             this.closeButton.TabIndex = 3;
@@ -143,16 +143,16 @@
             this.PicNumberTaker.Size = new System.Drawing.Size(45, 20);
             this.PicNumberTaker.TabIndex = 3;
             // 
-            // BGTeinlesen
+            // BShowGT
             // 
-            this.BGTeinlesen.AutoSize = true;
-            this.BGTeinlesen.Location = new System.Drawing.Point(146, 3);
-            this.BGTeinlesen.Name = "BGTeinlesen";
-            this.BGTeinlesen.Size = new System.Drawing.Size(101, 23);
-            this.BGTeinlesen.TabIndex = 4;
-            this.BGTeinlesen.Text = "GT Daten wählen";
-            this.BGTeinlesen.UseVisualStyleBackColor = true;
-            this.BGTeinlesen.Click += new System.EventHandler(this.BGTeinlesen_Click);
+            this.BShowGT.AutoSize = true;
+            this.BShowGT.Location = new System.Drawing.Point(361, 3);
+            this.BShowGT.Name = "BShowGT";
+            this.BShowGT.Size = new System.Drawing.Size(78, 23);
+            this.BShowGT.TabIndex = 5;
+            this.BShowGT.Text = "GT zeichnen";
+            this.BShowGT.UseVisualStyleBackColor = true;
+            this.BShowGT.Click += new System.EventHandler(this.BShowGT_Click);
             // 
             // Form1
             // 
@@ -177,11 +177,11 @@
         private System.Windows.Forms.PictureBox pB1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button showButton;
-        private System.Windows.Forms.Button clearButton;
         private System.Windows.Forms.Button BChooseFile;
         private System.Windows.Forms.Button closeButton;
         private System.Windows.Forms.NumericUpDown PicNumberTaker;
         private System.Windows.Forms.Button BGTeinlesen;
+        private System.Windows.Forms.Button BShowGT;
     }
 }
 

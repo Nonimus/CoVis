@@ -13,11 +13,11 @@ namespace WindowsFormsApp1
     // A struct to handle the Groundtruth data
     public struct GT
     {
-        int x_start;
-        int y_start;
-        int x_end;
-        int y_end;
-        int id;
+        public int x_start;
+        public int y_start;
+        public int x_end;
+        public int y_end;
+        public int id;
         public void SetVars(int xs, int ys, int xe, int ye, int idk)
         {
             x_start = xs;
@@ -26,10 +26,7 @@ namespace WindowsFormsApp1
             y_end = ye;
             id = idk;
         }
-        public int GetVars()
-        {
-            return x_start;
-        }
+
     }
     //A struct to combine GT and the picture
     public struct picGT
@@ -69,12 +66,7 @@ namespace WindowsFormsApp1
                     try
                     {
                         pB1.Load(pictureData[picNumSelected].picPfadName);
-                        Bitmap bm = new Bitmap(pB1.Image);
-                        Color pc = new Color();
-                        pc = Color.FromArgb(255, 255, 0, 0);
 
-                        bm.SetPixel(3, 3,pc);
-                        pB1.Image = bm;
                     }
                     catch(Exception ex)
                     {
@@ -90,10 +82,8 @@ namespace WindowsFormsApp1
                        
         }
 
-        private void clearButton_Click(object sender, EventArgs e)
-        {
-            pB1.Image = null;
-        }
+
+
 
         private void closeButton_Click(object sender, EventArgs e)
         {
@@ -130,6 +120,12 @@ namespace WindowsFormsApp1
 
         private void BGTeinlesen_Click(object sender, EventArgs e)
         {
+            //Löschen eventueller GT Daten
+            for(int i = 0; i < pictureData.Length;i++)
+            {
+                pictureData[i].Gtdaten = null;
+            }
+
             //Finden der Datei
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Textdateien (*.txt)|*.txt";
@@ -141,19 +137,21 @@ namespace WindowsFormsApp1
                 try
                 {
                     System.IO.StreamReader file = new System.IO.StreamReader(@ofd.FileName);
-                    while ((line = file.ReadLine()) != null)
+                    while ((line = file.ReadLine()) != null && line != "")
                     {
                         string[] args = line.Split(';');
-                        if (args[0] != "img")
+                        if (args.Length == 6 && args[0] != "img")
                         {
-                            while (args[0] != pictureData[counterP].picName && counterP < pictureData.Length)
-                            {
-                                counterP++;
-                            }
-                            if (args[0] == pictureData[counterP].picName && counterP < pictureData.Length)
+                            /* while (args[0] != pictureData[counterP].picName && counterP < pictureData.Length)
+                             {
+                                 counterP++;
+                             }*/
+                            string[] splitter = args[0].Split('.');
+                            counterP = Convert.ToInt32(splitter[0]);
+                            if (counterP < pictureData.Length && args[0] == pictureData[counterP].picName)
                             {
                                 //Keine GT bereits vorhanden
-                                if (pictureData[counterP].Gtdaten == null || pictureData[counterP].Gtdaten[0].GetVars()==0)
+                                if (pictureData[counterP].Gtdaten == null || pictureData[counterP].Gtdaten[0].x_start==0)
                                 {
                                     pictureData[counterP].Gtdaten = new GT[1];
                                     pictureData[counterP].Gtdaten[0].SetVars(Convert.ToInt32(args[1]), Convert.ToInt32(args[2]), Convert.ToInt32(args[3]), Convert.ToInt32(args[4]), Convert.ToInt32(args[5]));
@@ -187,5 +185,46 @@ namespace WindowsFormsApp1
             }
           
         }
+
+        private void BShowGT_Click(object sender, EventArgs e)
+        {
+            //Einlesen aktuelles Bild
+            int index = Convert.ToInt32(PicNumberTaker.Value);
+            if (pictureData[index].Gtdaten == null) return;
+            pB1.Load(pictureData[index].picPfadName);
+            Bitmap bm = new Bitmap(pB1.Image);            
+            //Draw a rectangle
+            for (int i = 0;i<pictureData[index].Gtdaten.Length;i++)
+            {
+                for (int x = pictureData[index].Gtdaten[i].x_start;x <= pictureData[index].Gtdaten[i].x_end;x++)
+                {
+                    //untere Kante
+                    bm.SetPixel(x, pictureData[index].Gtdaten[i].y_end, Color.Red);
+                    bm.SetPixel(x, pictureData[index].Gtdaten[i].y_end+1, Color.Red);
+                    bm.SetPixel(x, pictureData[index].Gtdaten[i].y_end-1, Color.Red);
+                    //obere Kante
+                    bm.SetPixel(x, pictureData[index].Gtdaten[i].y_start, Color.Red);
+                    bm.SetPixel(x, pictureData[index].Gtdaten[i].y_start + 1, Color.Red);
+                    bm.SetPixel(x, pictureData[index].Gtdaten[i].y_start - 1, Color.Red);
+                }
+                for (int x = pictureData[index].Gtdaten[i].y_start; x <= pictureData[index].Gtdaten[i].y_end; x++)
+                {
+                    //untere Kante
+                    bm.SetPixel(pictureData[index].Gtdaten[i].x_end,x, Color.Red);
+                    bm.SetPixel(pictureData[index].Gtdaten[i].x_end + 1,x, Color.Red);
+                    bm.SetPixel(pictureData[index].Gtdaten[i].x_end - 1,x, Color.Red);
+                    //obere Kante
+                    bm.SetPixel(pictureData[index].Gtdaten[i].x_start,x, Color.Red);
+                    bm.SetPixel(pictureData[index].Gtdaten[i].x_start + 1,x, Color.Red);
+                    bm.SetPixel(pictureData[index].Gtdaten[i].x_start - 1,x, Color.Red);
+                }
+            }
+
+
+            //Set Image as new Image
+            pB1.Image = bm;
+        }
+
+        
     }
 }
