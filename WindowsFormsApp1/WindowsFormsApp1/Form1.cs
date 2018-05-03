@@ -106,8 +106,10 @@ namespace WindowsFormsApp1
             {
                 int numPics = ofd.FileNames.Length;
                 pictureData = new picGT[numPics];
+                //Speichere alle Bilder als Referenzen in der globalen Variable ab
                 for( int i = 0;i <numPics;i++)
                 {
+                    //Isoliere den Bildnamen
                     string[] parts = ofd.FileNames[i].Split('\\');
                     pictureData[i].picPfadName = ofd.FileNames[i];
                     pictureData[i].picName = parts[parts.Length - 1];
@@ -133,30 +135,37 @@ namespace WindowsFormsApp1
             if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 string line = null;
-                int counterP = 0;
                 try
-                {
+                {   
                     System.IO.StreamReader file = new System.IO.StreamReader(@ofd.FileName);
                     while ((line = file.ReadLine()) != null && line != "")
                     {
+                        //Auftrennen in die Bestandteile Bildname;xs;xe;ys;ye;id
                         string[] args = line.Split(';');
-                        if (args.Length == 6 && args[0] != "img")
+                        if (args.Length == 6 && args[0] != "img") //Fehler abfangen;überspringen der ersten Zeile
                         {
-                            /* while (args[0] != pictureData[counterP].picName && counterP < pictureData.Length)
-                             {
-                                 counterP++;
-                             }*/
+                            //Berechnen der Position aus dem Namen der Datei
                             string[] splitter = args[0].Split('.');
-                            counterP = Convert.ToInt32(splitter[0]);
+                            int counterP = Convert.ToInt32(splitter[0]); 
+                            //Falls Berechnung fehl schlägt suche linear nach dem index mit dem Dateinamen
+                            if (counterP >= pictureData.Length || args[0] != pictureData[counterP].picName)
+                            {
+                                counterP = 0;
+                                while (counterP < pictureData.Length && args[0] != pictureData[counterP].picName)
+                                {
+                                    counterP++;
+                                }
+                            }                      
+                            //Überprüfung ob gültiger Index gefunden wurde oder ob einÜberlauf statt fand
                             if (counterP < pictureData.Length && args[0] == pictureData[counterP].picName)
                             {
-                                //Keine GT bereits vorhanden
+                                //Keine GT bereits vorhanden -erstelle Array
                                 if (pictureData[counterP].Gtdaten == null || pictureData[counterP].Gtdaten[0].x_start==0)
                                 {
                                     pictureData[counterP].Gtdaten = new GT[1];
                                     pictureData[counterP].Gtdaten[0].SetVars(Convert.ToInt32(args[1]), Convert.ToInt32(args[2]), Convert.ToInt32(args[3]), Convert.ToInt32(args[4]), Convert.ToInt32(args[5]));
                                 }
-                                else// GT vorhanden, also kopieren
+                                else// GT vorhanden, also kopieren und neues hinzufügen
                                 {
                                     GT[] zwischen = pictureData[counterP].Gtdaten;
                                     pictureData[counterP].Gtdaten = new GT[zwischen.Length + 1];
@@ -190,41 +199,54 @@ namespace WindowsFormsApp1
         {
             //Einlesen aktuelles Bild
             int index = Convert.ToInt32(PicNumberTaker.Value);
-            if (pictureData[index].Gtdaten == null) return;
             pB1.Load(pictureData[index].picPfadName);
-            Bitmap bm = new Bitmap(pB1.Image);            
-            //Draw a rectangle
-            for (int i = 0;i<pictureData[index].Gtdaten.Length;i++)
-            {
-                for (int x = pictureData[index].Gtdaten[i].x_start;x <= pictureData[index].Gtdaten[i].x_end;x++)
-                {
-                    //untere Kante
-                    bm.SetPixel(x, pictureData[index].Gtdaten[i].y_end, Color.Red);
-                    bm.SetPixel(x, pictureData[index].Gtdaten[i].y_end+1, Color.Red);
-                    bm.SetPixel(x, pictureData[index].Gtdaten[i].y_end-1, Color.Red);
-                    //obere Kante
-                    bm.SetPixel(x, pictureData[index].Gtdaten[i].y_start, Color.Red);
-                    bm.SetPixel(x, pictureData[index].Gtdaten[i].y_start + 1, Color.Red);
-                    bm.SetPixel(x, pictureData[index].Gtdaten[i].y_start - 1, Color.Red);
-                }
-                for (int x = pictureData[index].Gtdaten[i].y_start; x <= pictureData[index].Gtdaten[i].y_end; x++)
-                {
-                    //untere Kante
-                    bm.SetPixel(pictureData[index].Gtdaten[i].x_end,x, Color.Red);
-                    bm.SetPixel(pictureData[index].Gtdaten[i].x_end + 1,x, Color.Red);
-                    bm.SetPixel(pictureData[index].Gtdaten[i].x_end - 1,x, Color.Red);
-                    //obere Kante
-                    bm.SetPixel(pictureData[index].Gtdaten[i].x_start,x, Color.Red);
-                    bm.SetPixel(pictureData[index].Gtdaten[i].x_start + 1,x, Color.Red);
-                    bm.SetPixel(pictureData[index].Gtdaten[i].x_start - 1,x, Color.Red);
-                }
-            }
-
-
-            //Set Image as new Image
-            pB1.Image = bm;
+            LName.Text = pictureData[index].picName;
+            if (pictureData[index].Gtdaten == null) return;
+           
+            //Bild als neues Bild mit Rechteck ausgeben
+            pB1.Image = DrawRectangle(new Bitmap(pB1.Image), pictureData[index].Gtdaten, 3);
         }
 
-        
+        private Bitmap DrawRectangle(Bitmap pic,GT[] GTDaten ,int border)
+        {
+            Bitmap bm = pic;
+
+            //Draw a rectangle
+            //Iteriere GT Daten
+            for (int i = 0; i < GTDaten.Length; i++)
+            {
+                int median = Convert.ToInt32(border / 2);
+                for (int x = GTDaten[i].x_start; x <= GTDaten[i].x_end; x++)
+                {
+                    
+                    //untere Kante
+                    for(int b = GTDaten[i].y_end-median; b < GTDaten[i].y_end + median;b++)
+                    {
+                        bm.SetPixel(x, b, Color.Red);
+                    }
+                    //obere Kante
+                    for (int b = GTDaten[i].y_start - median; b < GTDaten[i].y_start + median; b++)
+                    {
+                        bm.SetPixel(x, b, Color.Red);
+                    }
+                }
+                for (int x = GTDaten[i].y_start; x <= GTDaten[i].y_end; x++)
+                {
+                    //untere Kante
+                    for (int b = GTDaten[i].x_end - median; b < GTDaten[i].x_end + median; b++)
+                    {
+                        bm.SetPixel(b, x, Color.Red);
+                    }
+                    //obere Kante
+                    for (int b = GTDaten[i].x_start - median; b < GTDaten[i].x_start + median; b++)
+                    {
+                        bm.SetPixel(b, x, Color.Red);
+                    }
+                }
+        }
+
+            return bm;
+        }
+
     }
 }

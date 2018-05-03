@@ -32,11 +32,12 @@
             this.pB1 = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.showButton = new System.Windows.Forms.Button();
+            this.BShowGT = new System.Windows.Forms.Button();
             this.BChooseFile = new System.Windows.Forms.Button();
             this.BGTeinlesen = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
             this.PicNumberTaker = new System.Windows.Forms.NumericUpDown();
-            this.BShowGT = new System.Windows.Forms.Button();
+            this.LName = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pB1)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -80,6 +81,7 @@
             this.flowLayoutPanel1.Controls.Add(this.BChooseFile);
             this.flowLayoutPanel1.Controls.Add(this.BGTeinlesen);
             this.flowLayoutPanel1.Controls.Add(this.closeButton);
+            this.flowLayoutPanel1.Controls.Add(this.LName);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(124, 338);
@@ -97,6 +99,17 @@
             this.showButton.Text = "Bild anzeigen";
             this.showButton.UseVisualStyleBackColor = true;
             this.showButton.Click += new System.EventHandler(this.showButton_Click);
+            // 
+            // BShowGT
+            // 
+            this.BShowGT.AutoSize = true;
+            this.BShowGT.Location = new System.Drawing.Point(361, 3);
+            this.BShowGT.Name = "BShowGT";
+            this.BShowGT.Size = new System.Drawing.Size(78, 23);
+            this.BShowGT.TabIndex = 5;
+            this.BShowGT.Text = "GT zeichnen";
+            this.BShowGT.UseVisualStyleBackColor = true;
+            this.BShowGT.Click += new System.EventHandler(this.BShowGT_Click);
             // 
             // BChooseFile
             // 
@@ -143,16 +156,13 @@
             this.PicNumberTaker.Size = new System.Drawing.Size(45, 20);
             this.PicNumberTaker.TabIndex = 3;
             // 
-            // BShowGT
+            // LName
             // 
-            this.BShowGT.AutoSize = true;
-            this.BShowGT.Location = new System.Drawing.Point(361, 3);
-            this.BShowGT.Name = "BShowGT";
-            this.BShowGT.Size = new System.Drawing.Size(78, 23);
-            this.BShowGT.TabIndex = 5;
-            this.BShowGT.Text = "GT zeichnen";
-            this.BShowGT.UseVisualStyleBackColor = true;
-            this.BShowGT.Click += new System.EventHandler(this.BShowGT_Click);
+            this.LName.AutoSize = true;
+            this.LName.Location = new System.Drawing.Point(75, 0);
+            this.LName.Name = "LName";
+            this.LName.Size = new System.Drawing.Size(0, 13);
+            this.LName.TabIndex = 6;
             // 
             // Form1
             // 
@@ -182,6 +192,7 @@
         private System.Windows.Forms.NumericUpDown PicNumberTaker;
         private System.Windows.Forms.Button BGTeinlesen;
         private System.Windows.Forms.Button BShowGT;
+        private System.Windows.Forms.Label LName;
     }
 }
 
