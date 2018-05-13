@@ -36,8 +36,9 @@
             this.BChooseFile = new System.Windows.Forms.Button();
             this.BGTeinlesen = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
-            this.PicNumberTaker = new System.Windows.Forms.NumericUpDown();
             this.LName = new System.Windows.Forms.Label();
+            this.PicNumberTaker = new System.Windows.Forms.NumericUpDown();
+            this.B_StartSearch = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pB1)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -77,6 +78,7 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.showButton);
+            this.flowLayoutPanel1.Controls.Add(this.B_StartSearch);
             this.flowLayoutPanel1.Controls.Add(this.BShowGT);
             this.flowLayoutPanel1.Controls.Add(this.BChooseFile);
             this.flowLayoutPanel1.Controls.Add(this.BGTeinlesen);
@@ -103,7 +105,7 @@
             // BShowGT
             // 
             this.BShowGT.AutoSize = true;
-            this.BShowGT.Location = new System.Drawing.Point(361, 3);
+            this.BShowGT.Location = new System.Drawing.Point(280, 3);
             this.BShowGT.Name = "BShowGT";
             this.BShowGT.Size = new System.Drawing.Size(78, 23);
             this.BShowGT.TabIndex = 5;
@@ -114,7 +116,7 @@
             // BChooseFile
             // 
             this.BChooseFile.AutoSize = true;
-            this.BChooseFile.Location = new System.Drawing.Point(269, 3);
+            this.BChooseFile.Location = new System.Drawing.Point(188, 3);
             this.BChooseFile.Name = "BChooseFile";
             this.BChooseFile.Size = new System.Drawing.Size(86, 23);
             this.BChooseFile.TabIndex = 2;
@@ -125,7 +127,7 @@
             // BGTeinlesen
             // 
             this.BGTeinlesen.AutoSize = true;
-            this.BGTeinlesen.Location = new System.Drawing.Point(162, 3);
+            this.BGTeinlesen.Location = new System.Drawing.Point(81, 3);
             this.BGTeinlesen.Name = "BGTeinlesen";
             this.BGTeinlesen.Size = new System.Drawing.Size(101, 23);
             this.BGTeinlesen.TabIndex = 4;
@@ -136,13 +138,21 @@
             // closeButton
             // 
             this.closeButton.AutoSize = true;
-            this.closeButton.Location = new System.Drawing.Point(81, 3);
+            this.closeButton.Location = new System.Drawing.Point(461, 32);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(75, 23);
             this.closeButton.TabIndex = 3;
             this.closeButton.Text = "beenden";
             this.closeButton.UseVisualStyleBackColor = true;
             this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
+            // 
+            // LName
+            // 
+            this.LName.AutoSize = true;
+            this.LName.Location = new System.Drawing.Point(455, 29);
+            this.LName.Name = "LName";
+            this.LName.Size = new System.Drawing.Size(0, 13);
+            this.LName.TabIndex = 6;
             // 
             // PicNumberTaker
             // 
@@ -156,13 +166,16 @@
             this.PicNumberTaker.Size = new System.Drawing.Size(45, 20);
             this.PicNumberTaker.TabIndex = 3;
             // 
-            // LName
+            // B_StartSearch
             // 
-            this.LName.AutoSize = true;
-            this.LName.Location = new System.Drawing.Point(75, 0);
-            this.LName.Name = "LName";
-            this.LName.Size = new System.Drawing.Size(0, 13);
-            this.LName.TabIndex = 6;
+            this.B_StartSearch.AutoSize = true;
+            this.B_StartSearch.Location = new System.Drawing.Point(364, 3);
+            this.B_StartSearch.Name = "B_StartSearch";
+            this.B_StartSearch.Size = new System.Drawing.Size(75, 23);
+            this.B_StartSearch.TabIndex = 7;
+            this.B_StartSearch.Text = "Finde Sie";
+            this.B_StartSearch.UseVisualStyleBackColor = true;
+            this.B_StartSearch.Click += new System.EventHandler(this.B_StartSearch_Click);
             // 
             // Form1
             // 
@@ -193,6 +206,7 @@
         private System.Windows.Forms.Button BGTeinlesen;
         private System.Windows.Forms.Button BShowGT;
         private System.Windows.Forms.Label LName;
+        private System.Windows.Forms.Button B_StartSearch;
     }
 }
 

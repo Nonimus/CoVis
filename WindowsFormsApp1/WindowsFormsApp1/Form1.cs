@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CustomPictureFunctions; //Used to define Custome Functions
+using Emgu.CV.Structure;
+using Emgu.CV;
 
 namespace WindowsFormsApp1
 {
@@ -48,11 +51,11 @@ namespace WindowsFormsApp1
         //Global Variables
         String[] FileNames = null;
         picGT[] pictureData = null;
+        FunctionHandler PFH = new FunctionHandler();
 
         public Form1()
         {
-            InitializeComponent();
-            
+            InitializeComponent();            
         }
 
         private void showButton_Click(object sender, EventArgs e)
@@ -248,5 +251,14 @@ namespace WindowsFormsApp1
             return bm;
         }
 
+        private void B_StartSearch_Click(object sender, EventArgs e)
+        {
+            //Einlesen aktuelles Bild
+            int index = Convert.ToInt32(PicNumberTaker.Value);
+            pB1.Load(pictureData[index].picPfadName);
+            LName.Text = pictureData[index].picName;
+            
+            pB1.Image = PFH.MainHandler(new Image<Bgr,byte>(pictureData[index].picPfadName));
+        }
     }
 }
