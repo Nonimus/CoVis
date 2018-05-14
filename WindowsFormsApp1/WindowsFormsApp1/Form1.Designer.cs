@@ -32,17 +32,21 @@
             this.pB1 = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.showButton = new System.Windows.Forms.Button();
+            this.B_StartSearch = new System.Windows.Forms.Button();
             this.BShowGT = new System.Windows.Forms.Button();
             this.BChooseFile = new System.Windows.Forms.Button();
             this.BGTeinlesen = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
             this.LName = new System.Windows.Forms.Label();
             this.PicNumberTaker = new System.Windows.Forms.NumericUpDown();
-            this.B_StartSearch = new System.Windows.Forms.Button();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.StepperShowerTaker = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pB1)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PicNumberTaker)).BeginInit();
+            this.flowLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.StepperShowerTaker)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -52,13 +56,14 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 81.83183F));
             this.tableLayoutPanel1.Controls.Add(this.pB1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.PicNumberTaker, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(666, 373);
             this.tableLayoutPanel1.TabIndex = 0;
             this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
@@ -70,10 +75,11 @@
             this.pB1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pB1.Location = new System.Drawing.Point(3, 3);
             this.pB1.Name = "pB1";
-            this.pB1.Size = new System.Drawing.Size(660, 329);
+            this.pB1.Size = new System.Drawing.Size(660, 311);
             this.pB1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pB1.TabIndex = 0;
             this.pB1.TabStop = false;
+            this.pB1.Click += new System.EventHandler(this.pB1_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -86,9 +92,9 @@
             this.flowLayoutPanel1.Controls.Add(this.LName);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(124, 338);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(124, 320);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(539, 32);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(539, 29);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // showButton
@@ -101,6 +107,17 @@
             this.showButton.Text = "Bild anzeigen";
             this.showButton.UseVisualStyleBackColor = true;
             this.showButton.Click += new System.EventHandler(this.showButton_Click);
+            // 
+            // B_StartSearch
+            // 
+            this.B_StartSearch.AutoSize = true;
+            this.B_StartSearch.Location = new System.Drawing.Point(364, 3);
+            this.B_StartSearch.Name = "B_StartSearch";
+            this.B_StartSearch.Size = new System.Drawing.Size(75, 23);
+            this.B_StartSearch.TabIndex = 7;
+            this.B_StartSearch.Text = "Finde Sie";
+            this.B_StartSearch.UseVisualStyleBackColor = true;
+            this.B_StartSearch.Click += new System.EventHandler(this.B_StartSearch_Click);
             // 
             // BShowGT
             // 
@@ -156,7 +173,7 @@
             // 
             // PicNumberTaker
             // 
-            this.PicNumberTaker.Location = new System.Drawing.Point(3, 338);
+            this.PicNumberTaker.Location = new System.Drawing.Point(3, 3);
             this.PicNumberTaker.Maximum = new decimal(new int[] {
             300,
             0,
@@ -166,16 +183,26 @@
             this.PicNumberTaker.Size = new System.Drawing.Size(45, 20);
             this.PicNumberTaker.TabIndex = 3;
             // 
-            // B_StartSearch
+            // flowLayoutPanel2
             // 
-            this.B_StartSearch.AutoSize = true;
-            this.B_StartSearch.Location = new System.Drawing.Point(364, 3);
-            this.B_StartSearch.Name = "B_StartSearch";
-            this.B_StartSearch.Size = new System.Drawing.Size(75, 23);
-            this.B_StartSearch.TabIndex = 7;
-            this.B_StartSearch.Text = "Finde Sie";
-            this.B_StartSearch.UseVisualStyleBackColor = true;
-            this.B_StartSearch.Click += new System.EventHandler(this.B_StartSearch_Click);
+            this.flowLayoutPanel2.Controls.Add(this.PicNumberTaker);
+            this.flowLayoutPanel2.Controls.Add(this.StepperShowerTaker);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 320);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(115, 29);
+            this.flowLayoutPanel2.TabIndex = 3;
+            // 
+            // StepperShowerTaker
+            // 
+            this.StepperShowerTaker.Location = new System.Drawing.Point(54, 3);
+            this.StepperShowerTaker.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.StepperShowerTaker.Name = "StepperShowerTaker";
+            this.StepperShowerTaker.Size = new System.Drawing.Size(45, 20);
+            this.StepperShowerTaker.TabIndex = 4;
             // 
             // Form1
             // 
@@ -190,6 +217,8 @@
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PicNumberTaker)).EndInit();
+            this.flowLayoutPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.StepperShowerTaker)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -207,6 +236,8 @@
         private System.Windows.Forms.Button BShowGT;
         private System.Windows.Forms.Label LName;
         private System.Windows.Forms.Button B_StartSearch;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.NumericUpDown StepperShowerTaker;
     }
 }
 

@@ -55,7 +55,8 @@ namespace WindowsFormsApp1
 
         public Form1()
         {
-            InitializeComponent();            
+            InitializeComponent();
+
         }
 
         private void showButton_Click(object sender, EventArgs e)
@@ -257,8 +258,26 @@ namespace WindowsFormsApp1
             int index = Convert.ToInt32(PicNumberTaker.Value);
             pB1.Load(pictureData[index].picPfadName);
             LName.Text = pictureData[index].picName;
+
+            int step = Convert.ToInt32(StepperShowerTaker.Value);
+
+            pB1.Image = PFH.MainHandler(new Image<Bgr,byte>(pictureData[index].picPfadName),step);
+        }
+
+        private void pB1_Click(object sender, EventArgs e)
+        {
+          /*  MouseEventArgs me = (MouseEventArgs)e;
+            int x = me.X;
+            int y = me.Y;
+            LName.Text = PFH.GetHue(new Image<Bgr, Byte>(new Bitmap(pB1.Image)), x, y).ToString();
+            Bitmap test = new Bitmap(pB1.Image);
+            GT[] testi = new GT[1];
+            GT testi1 = new GT();
+            testi1.x_start = x - 2;testi1.x_end = x + 2;
+            testi1.y_start = y - 2;testi1.y_end = y + 2;
+            testi[0] = testi1;
             
-            pB1.Image = PFH.MainHandler(new Image<Bgr,byte>(pictureData[index].picPfadName));
+            pB1.Image = DrawRectangle(test, testi, 5);*/
         }
     }
 }
